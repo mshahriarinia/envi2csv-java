@@ -1,0 +1,7 @@
+samples = 4
+lines =  4
+bands = 4
+header offset = 0
+data type = 3
+interleave = bsq
+byte order = 1
