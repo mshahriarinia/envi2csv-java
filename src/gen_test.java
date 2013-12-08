@@ -17,7 +17,7 @@ The data type: the binary data codification.
 byteorder: 0 for little endian, 1 for big endian
 */
 public class gen_test{
-	//params modify the params here to test different cases
+	//params: modify the params here to test different cases
 	static int lines=4,samples=4,bands=4,datatype=3,datatype_size=4;
 	static int byteorder=1;
 	// data array
