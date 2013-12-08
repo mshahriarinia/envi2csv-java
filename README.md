@@ -5,7 +5,7 @@ envi to csv formart
 
 This is a eclipse java project
 
-src/envi2csv.java
+src/envi2csv.java 
 run command "java envi2csv hdr_file_name" or in run configuration add the hdr_file_name as the parameter.
 
 src/gen_test.java
