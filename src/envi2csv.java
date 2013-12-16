@@ -25,7 +25,7 @@ public class envi2csv{
 	static String interleave;
 	static int byte_order=0;//0 for little endian;
 	static double wavelenght[];
-	
+	static boolean omit_dimension_indicates=false;
 	
 	public static void main(String[] args) throws IOException{
 		if(args.length<1){
@@ -88,7 +88,12 @@ public class envi2csv{
 					case 9: data_size_per_cell=16;break;
 					case 12: data_size_per_cell=2;break;
 					}
-					bw.write("\nl"+line_no+",s"+sample_no+",b"+band_no+","+value);
+					if(omit_dimension_indicates==false){
+						bw.write("\nl"+line_no+",s"+sample_no+",b"+band_no+","+value);
+					}
+					else{
+						bw.write("\n"+value);
+					}
 					
 				}
 			}
@@ -134,8 +139,12 @@ public class envi2csv{
 					case 9: data_size_per_cell=16;break;
 					case 12: data_size_per_cell=2;break;
 					}
-					bw.write("\nl"+line_no+",s"+sample_no+",b"+band_no+","+value);
-					
+					if(omit_dimension_indicates==false){
+						bw.write("\nl"+line_no+",s"+sample_no+",b"+band_no+","+value);
+					}
+					else{
+						bw.write("\n"+value);
+					}
 				}
 			}
 		}
@@ -183,7 +192,12 @@ public class envi2csv{
 					case 9: data_size_per_cell=16;break;
 					case 12: data_size_per_cell=2;break;
 					}
-					bw.write("\nl"+line_no+",s"+sample_no+",b"+band_no+","+value);
+					if(omit_dimension_indicates==false){
+						bw.write("\nl"+line_no+",s"+sample_no+",b"+band_no+","+value);
+					}
+					else{
+						bw.write("\n"+value);
+					}
 				}
 			}
 		}
