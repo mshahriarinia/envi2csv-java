@@ -40,13 +40,13 @@ public class envi2csv{
 		//read img file and convert the data to csv format
 		//3d array envidata[num_lines][num_samples][num_bands];
 		if(interleave.equalsIgnoreCase("BIP")){
-			read_image_bip(hdrfile.substring(0, hdrfile.length()-3));
+			read_image_bip(hdrfile.substring(0, hdrfile.length()-4));
 		}
 		else if(interleave.equalsIgnoreCase("BIL")){
-			read_image_bil(hdrfile.substring(0, hdrfile.length()-3));
+			read_image_bil(hdrfile.substring(0, hdrfile.length()-4));
 		}
 		else if(interleave.equalsIgnoreCase("BSQ")){
-			read_image_bsq(hdrfile.substring(0, hdrfile.length()-3));
+			read_image_bsq(hdrfile.substring(0, hdrfile.length()-4));
 		}
 		
 	}
