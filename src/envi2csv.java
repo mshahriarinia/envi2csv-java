@@ -17,7 +17,7 @@ The data type: the binary data codification.
 ◦ 12: 2-byte unsigned integer
 */
 //FIXME
-//unsigned data not processed
+//complex number not handled
 public class envi2csv{
 	static long num_lines=0,num_samples=0,num_bands=0,headoffset;
 	static int data_type=-1;
@@ -25,7 +25,7 @@ public class envi2csv{
 	static String interleave;
 	static int byte_order=0;//0 for little endian;
 	static double wavelenght[];
-	static boolean omit_dimension_indicates=false;
+	static boolean omit_dimension_indicates=true;
 	
 	public static void main(String[] args) throws IOException{
 		if(args.length<1){
@@ -85,13 +85,24 @@ public class envi2csv{
 					String value="";
 					//FIXME
 					switch (data_type){
-					case 1:  break;//value=Integer.toString(bb.get((int) ((sample_no*num_samples+band_no)*data_size_per_cell)));break;
+					case 1: value=     Integer.toString(bb.get((int) ((sample_no*num_bands+band_no)*data_size_per_cell))& 0x000000ff); break;
 					case 2: value=Integer.toString(bb.getShort((int) ((sample_no*num_bands+band_no)*data_size_per_cell)));break;
-					case 3: value=Integer.toString(bb.getInt((int) ((sample_no*num_bands+band_no)*data_size_per_cell)));break;
-					case 4: value=Float.toString(bb.getFloat((int) ((sample_no*num_bands+band_no)*data_size_per_cell)));break;
+					case 3: value=  Integer.toString(bb.getInt((int) ((sample_no*num_bands+band_no)*data_size_per_cell)));break;
+					case 4: value=  Float.toString(bb.getFloat((int) ((sample_no*num_bands+band_no)*data_size_per_cell)));break;
 					case 5: value=Double.toString(bb.getDouble((int) ((sample_no*num_bands+band_no)*data_size_per_cell)));break;
 					case 9: data_size_per_cell=16;break;
-					case 12: data_size_per_cell=2;break;
+					case 12: {
+						int  i=0;
+						byte b0=bb.get((int) ((sample_no*num_bands+band_no)*data_size_per_cell));
+						byte b1=bb.get((int) ((sample_no*num_bands+band_no)*data_size_per_cell+1));
+						if(byte_order==0){//little endian
+							i = ((b1 << 8) & 0x0000ff00) | (b0 & 0x000000ff);
+						}
+						else{//big endian
+							i = ((b0 << 8) & 0x0000ff00) | (b1 & 0x000000ff);
+						}
+					}
+						
 					}
 					if(omit_dimension_indicates==false){
 						bw.write("\nl"+line_no+",s"+sample_no+",b"+band_no+","+value);
@@ -141,13 +152,23 @@ public class envi2csv{
 					String value="";
 					//FIXME
 					switch (data_type){
-					case 1:  break;//value=Integer.toString(bb.get((int) ((sample_no*num_samples+band_no)*data_size_per_cell)));break;
+					case 1:  value=    Integer.toString(bb.get((int) ((sample_no+band_no*num_samples)*data_size_per_cell))& 0x000000ff); break;
 					case 2: value=Integer.toString(bb.getShort((int) ((sample_no+band_no*num_samples)*data_size_per_cell)));break;
-					case 3: value=Integer.toString(bb.getInt((int) ((sample_no+band_no*num_samples)*data_size_per_cell)));break;
-					case 4: value=Float.toString(bb.getFloat((int) ((sample_no+band_no*num_samples)*data_size_per_cell)));break;
+					case 3: value=  Integer.toString(bb.getInt((int) ((sample_no+band_no*num_samples)*data_size_per_cell)));break;
+					case 4: value=  Float.toString(bb.getFloat((int) ((sample_no+band_no*num_samples)*data_size_per_cell)));break;
 					case 5: value=Double.toString(bb.getDouble((int) ((sample_no+band_no*num_samples)*data_size_per_cell)));break;
 					case 9: data_size_per_cell=16;break;
-					case 12: data_size_per_cell=2;break;
+					case 12: {
+						int  i=0;
+						byte b0=bb.get((int) ((sample_no+band_no*num_samples)*data_size_per_cell));
+						byte b1=bb.get((int) ((sample_no+band_no*num_samples)*data_size_per_cell+1));
+						if(byte_order==0){//little endian
+							i = ((b1 << 8) & 0x0000ff00) | (b0 & 0x000000ff);
+						}
+						else{//big endian
+							i = ((b0 << 8) & 0x0000ff00) | (b1 & 0x000000ff);
+						}
+					}
 					}
 					if(omit_dimension_indicates==false){
 						bw.write("\nl"+line_no+",s"+sample_no+",b"+band_no+","+value);
@@ -199,13 +220,23 @@ public class envi2csv{
 					String value="";
 					//FIXME
 					switch (data_type){
-					case 1:  break;//value=Integer.toString(bb.get((int) ((sample_no*num_samples+band_no)*data_size_per_cell)));break;
+					case 1:  value=    Integer.toString(bb.get((int) ((sample_no+band_no*num_samples)*data_size_per_cell))& 0x000000ff); break;
 					case 2: value=Integer.toString(bb.getShort((int) ((sample_no+band_no*num_samples)*data_size_per_cell)));break;
-					case 3: value=Integer.toString(bb.getInt((int) ((sample_no+band_no*num_samples)*data_size_per_cell)));break;
-					case 4: value=Float.toString(bb.getFloat((int) ((sample_no+band_no*num_samples)*data_size_per_cell)));break;
+					case 3: value=  Integer.toString(bb.getInt((int) ((sample_no+band_no*num_samples)*data_size_per_cell)));break;
+					case 4: value=  Float.toString(bb.getFloat((int) ((sample_no+band_no*num_samples)*data_size_per_cell)));break;
 					case 5: value=Double.toString(bb.getDouble((int) ((sample_no+band_no*num_samples)*data_size_per_cell)));break;
 					case 9: data_size_per_cell=16;break;
-					case 12: data_size_per_cell=2;break;
+					case 12:{
+						int  i=0;
+						byte b0=bb.get((int) ((sample_no+band_no*num_samples)*data_size_per_cell));
+						byte b1=bb.get((int) ((sample_no+band_no*num_samples)*data_size_per_cell+1));
+						if(byte_order==0){//little endian
+							i = ((b1 << 8) & 0x0000ff00) | (b0 & 0x000000ff);
+						}
+						else{//big endian
+							i = ((b0 << 8) & 0x0000ff00) | (b1 & 0x000000ff);
+						}
+					}
 					}
 					if(omit_dimension_indicates==false){
 						bw.write("\nl"+line_no+",s"+sample_no+",b"+band_no+","+value);
