@@ -55,7 +55,12 @@ public class envi2csv{
 		
 		RandomAccessFile img=new RandomAccessFile(imgfile,"r");
 		BufferedWriter bw=new BufferedWriter(new FileWriter(new File(imgfile+".csv")));
-		bw.write("line_no,sample_no,band_no,value");
+		if(omit_dimension_indicates==false){
+			bw.write("line_no,sample_no,band_no,value");
+		}
+		else{
+			//bw.write("value");
+		}
 		byte[] data_a_line=new byte[(int) (num_samples*num_bands*data_size_per_cell)];
 		
 		for(int line_no=0;line_no<num_lines;line_no++){
@@ -106,7 +111,12 @@ public class envi2csv{
 		//read img file, line by line into csv file, bip
 		RandomAccessFile img=new RandomAccessFile(imgfile,"r");
 		BufferedWriter bw=new BufferedWriter(new FileWriter(new File(imgfile+".csv")));
-		bw.write("line_no,sample_no,band_no,value");
+		if(omit_dimension_indicates==false){
+			bw.write("line_no,sample_no,band_no,value");
+		}
+		else{
+			//bw.write("value");
+		}
 		byte[] data_a_line=new byte[(int) (num_samples*num_bands*data_size_per_cell)];
 		
 		for(int line_no=0;line_no<num_lines;line_no++){
@@ -156,7 +166,12 @@ public class envi2csv{
 		//read img file, line by line into csv file, bsq
 		RandomAccessFile img=new RandomAccessFile(imgfile,"r");
 		BufferedWriter bw=new BufferedWriter(new FileWriter(new File(imgfile+".csv")));
-		bw.write("line_no,sample_no,band_no,value");
+		if(omit_dimension_indicates==false){
+			bw.write("line_no,sample_no,band_no,value");
+		}
+		else{
+			//bw.write("value");
+		}
 		byte[] data_a_line=new byte[(int) (num_samples*num_bands*data_size_per_cell)];
 		
 		for(int line_no=0;line_no<num_lines;line_no++){
