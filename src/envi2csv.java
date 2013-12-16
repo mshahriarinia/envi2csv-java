@@ -59,7 +59,7 @@ public class envi2csv{
 			bw.write("line_no,sample_no,band_no,value");
 		}
 		else{
-			//bw.write("value");
+			bw.write("values");
 		}
 		byte[] data_a_line=new byte[(int) (num_samples*num_bands*data_size_per_cell)];
 		
@@ -115,7 +115,7 @@ public class envi2csv{
 			bw.write("line_no,sample_no,band_no,value");
 		}
 		else{
-			//bw.write("value");
+			bw.write("values");
 		}
 		byte[] data_a_line=new byte[(int) (num_samples*num_bands*data_size_per_cell)];
 		
@@ -170,7 +170,7 @@ public class envi2csv{
 			bw.write("line_no,sample_no,band_no,value");
 		}
 		else{
-			//bw.write("value");
+			bw.write("values");
 		}
 		byte[] data_a_line=new byte[(int) (num_samples*num_bands*data_size_per_cell)];
 		
