@@ -18,19 +18,21 @@ byteorder: 0 for little endian, 1 for big endian
 */
 public class gen_test{
 	//params: modify the params here to test different cases
-	static int lines=4,samples=4,bands=4,datatype=3,datatype_size=4;
+	static int lines=4,samples=4,bands=3,datatype=2,datatype_size=2;
 	static int byteorder=1;
 	// data array
 	static byte[][][] arr=new byte[lines][samples][bands*datatype_size]; // 3 dimensions: line, sample, and bands
 	public static void main(String Args[]) throws IOException{
-		
+		int tmp=0;
+		System.out.println("lines: "+lines+", samples: "+samples+", bands: "+bands+", datatype:"+datatype+",  datatype_size: "+datatype_size);
+		System.out.println("arr["+lines+"]["+samples+"]["+bands+"]");
 		for(int i=0;i<lines;i++){
 			System.out.println();
 			for(int j=0;j<samples;j++){
 				System.out.println();
 				for(int k=0;k<bands*datatype_size;k++){
-					arr[i][j][k]=(byte)(k%2+i+j+k);//modify here to test different arrays
-					System.out.print(" " +arr[i][j][k]);
+					arr[i][j][k]=(byte)(++tmp);//modify here to test different arrays
+					System.out.print(" arr["+i+"]["+j+"]["+k+"]=" +arr[i][j][k]+"\n");
 				}
 			}
 		}
