@@ -105,7 +105,7 @@ public class envi2csv{
 						
 					}
 					if(omit_dimension_indicates==false){
-						bw.write("\nl"+line_no+",s"+sample_no+",b"+band_no+","+value);
+						bw.write("\n"+line_no+","+sample_no+","+band_no+","+value);
 					}
 					else{
 						bw.write("\n"+value);
@@ -171,7 +171,7 @@ public class envi2csv{
 					}
 					}
 					if(omit_dimension_indicates==false){
-						bw.write("\nl"+line_no+",s"+sample_no+",b"+band_no+","+value);
+						bw.write("\n"+line_no+","+sample_no+","+band_no+","+value);
 					}
 					else{
 						bw.write("\n"+value);
@@ -239,7 +239,7 @@ public class envi2csv{
 					}
 					}
 					if(omit_dimension_indicates==false){
-						bw.write("\nl"+line_no+",s"+sample_no+",b"+band_no+","+value);
+						bw.write("\n"+line_no+","+sample_no+","+band_no+","+value);
 					}
 					else{
 						bw.write("\n"+value);
