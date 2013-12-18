@@ -25,7 +25,7 @@ public class envi2csv{
 	static String interleave;
 	static int byte_order=0;//0 for little endian;
 	static double wavelenght[];
-	static boolean omit_dimension_indicates=true;
+	static boolean omit_dimension_indicates=false;
 	
 	public static void main(String[] args) throws IOException{
 		if(args.length<1){
