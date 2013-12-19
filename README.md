@@ -11,4 +11,4 @@ run command "java envi2csv hdr_file_name" or in run configuration add the hdr_fi
 src/gen_test.java:
 generates the hdr file and the binary data file to test if the envi2csv.java is correct. You can tweak what binary files you want to generate.
 
-I tested with the datatype=2, 3, and byteorder=0,1, which generate the same csv file.
+
